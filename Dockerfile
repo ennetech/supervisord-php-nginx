@@ -49,11 +49,6 @@ RUN mkdir /var/run/php
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Setting up webroot
-RUN mkdir -p /webroot/public
-COPY index.php /webroot/public/index.php
-COPY info.php /webroot/public/info.php
-
 # Supervisor configuration
 COPY supervisor.conf /supervisor.conf
 RUN sed -i "s/\[PHP_VERSION\]/$PHP_VERSION/" /supervisor.conf
