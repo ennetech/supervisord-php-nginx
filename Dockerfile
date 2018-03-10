@@ -60,4 +60,3 @@ RUN apt-get clean \
 CMD ["supervisord","-c","/supervisor.conf"]
 
 EXPOSE 80
-VOLUME ["/webroot"]
