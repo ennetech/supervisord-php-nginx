@@ -56,9 +56,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY supervisor.conf /supervisor.conf
 RUN sed -i "s/\[PHP_VERSION\]/$PHP_VERSION/" /supervisor.conf
 
+# Add default webroot
+COPY default_webroot /webroot
+
 # Cleanup
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
+    
 # Runtime command
 CMD ["supervisord","-c","/supervisor.conf"]
 
