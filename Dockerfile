@@ -22,6 +22,9 @@ RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/sites-available/default
 RUN sed -i "s/\[PHP_VERSION\]/$PHP_VERSION/" /etc/nginx/sites-available/default
 
+# Make nginx log to foreground
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Install PHP
 RUN \
   echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php.list && \
